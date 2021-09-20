@@ -1,32 +1,48 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <component :is="layout">
+      <transition name="fade" mode="out-in">
+          <router-view :key="$route.fullPath"/>
+      </transition>
+    </component>
   </div>
 </template>
 
+<script>
+const default_layout = "login";
+
+export default {
+  computed: {
+    layout() {
+      return (this.$route.meta.layout || default_layout) + '-layout';
+    }
+  },
+};
+</script>
+
 <style lang="scss">
+@import '@/assets/scss/app.scss';
+
+body {
+  margin: 0;
+  padding: 0;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+}
+h1,h2,h3,h4 {
+  color: black;
+  line-height: 1;
 }
 
-#nav {
-  padding: 30px;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s ease;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
