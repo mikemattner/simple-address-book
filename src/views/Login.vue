@@ -1,20 +1,52 @@
 <template>
-  <div class="login-box">
+  <div class="login-box long-shadow">
     <div class="login-box__header">
-      <img alt="Vue logo" class="login-box__logo" src="../assets/logo.png">
-      <h1 class="login-box__title">{{ msg }}</h1>
+      <Logo small />
+      <h1 class="login-box__title">{{ msg }}, {{ user }}.</h1>
+      <p class="login-box__body">{{ body }}</p>
+      <form @submit.prevent="loginToApp">
+        <div>
+          <label>Name</label>
+          <input v-model="login.name" />
+        </div>
+        <div>
+          <label>Password</label>
+          <input v-model="login.password" />
+        </div>
+        <button type="submit">Login</button>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
+import Logo from '@/components/brand/Logo.vue'
 export default {
   name: "Login",
+  components: {
+    Logo,
+  },
   data() {
     return {
       msg: "Welcome",
+      body: "Let's manage your contacts today.",
+      user: this.$store.state.user.name,
+      login: {
+        name: "",
+        password: "",
+      },
+      formValid: false,
     };
-  }
+  },
+  methods: {
+    loginToApp() {
+      if (!this.formValid) {
+        return;
+      }
+      const { name, address, phone } = this.contact;
+      this.contacts.push({ id: uuidv4(), name, address, phone });
+    },
+  },
 };
 </script>
 
@@ -24,24 +56,13 @@ export default {
     padding: 20px;
     border-radius: 10px;
     background-color: white;
-    box-shadow:
-      2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
-      6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
-      12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
-      22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
-      41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
-      100px 100px 80px rgba(0, 0, 0, 0.07)
-    ;
-
-    &__logo {
-      width: 30px;
-      margin: 0 auto;
-    }
 
     &__title {
-      font-size: 1.5rem;
-      letter-spacing: 0.0625em;
-      text-transform: uppercase;
+      margin: 0;
+      color: $color-brand-primary-blue;
+    }
+    &__body {
+      margin-top: 0;
     }
 
     &__header {
