@@ -1,6 +1,6 @@
-import Login from '../views/Login.vue';
-import Contacts from '../views/Contacts.vue';
-import Settings from '../views/Settings.vue';
+import Login from '../views/login/Login.vue';
+import Contacts from '../views/contacts/Contacts.vue';
+import Settings from '../views/settings/Settings.vue';
 
 const routes = [
   {

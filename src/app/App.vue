@@ -38,7 +38,7 @@ h1,h2,h3,h4 {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .5s ease;
+  transition: opacity .25s ease;
 }
 
 .fade-enter,

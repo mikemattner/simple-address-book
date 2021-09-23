@@ -1,7 +1,7 @@
 <template>
-  <div class="dashboard">
-    <div class="login-box__header">
-      <h1 class="login-box__title">{{ msg }}</h1>
+  <div class="settings-content">
+    <div class="settings-content__header">
+      <h1 class="settings-content__title">{{ msg }}</h1>
     </div>
   </div>
 </template>

@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'Logo',
+  name: 'VueLogo',
   props: {
     large: Boolean,
     medium: Boolean,
@@ -33,7 +33,7 @@ export default {
        width: 100px; 
     }
     &-small {
-        width: 45px;
+        width: 40px;
     }
 }
 </style>

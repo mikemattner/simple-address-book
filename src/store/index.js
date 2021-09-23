@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     loggedIn: JSON.parse(localStorage.getItem('fakeToken')) || false,
-    user: JSON.parse(localStorage.getItem('fakeUser')) || {name: 'Guest'},
+    user: JSON.parse(localStorage.getItem('fakeUser')) || {},
     contacts: JSON.parse(localStorage.getItem('fakeContacts')) || {},
   },
   mutations: {
@@ -15,20 +15,27 @@ export default new Vuex.Store({
       state.loggedIn = JSON.parse(localStorage.getItem('fakeToken'));
     },
     SET_USER(state, payload) {
-      localStorage.setItem('fakeUser', bool);
+      localStorage.setItem('fakeUser', JSON.stringify(payload));
       state.user = JSON.parse(localStorage.getItem('fakeUser'));
     },
-    CLEAR_ALL() {
+    SET_CONTACTS(state, payload) {
+      localStorage.setItem('fakeUser', JSON.stringify(payload));
+      state.contacts = JSON.parse(localStorage.getItem('fakeUser'));
+    },
+    CLEAR_STORAGE() {
       localStorage.clear();
     },
   },
   actions: {
     LOGIN({ commit }, payload) {
-      commit('SET_USER', JSON.stringify(payload));
+      commit('SET_USER', payload);
       commit('SET_LOGIN', true);
     },
     LOGOUT({ commit }) {
-      commit('CLEAR_ALL');
+      commit('CLEAR_STORAGE');
+    },
+    SAVE_CONTACTS({ commit }, payload) {
+      commit('SET_CONTACTS', payload);
     },
   }
 })
