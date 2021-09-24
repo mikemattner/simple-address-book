@@ -1,0 +1,58 @@
+const contacts = [
+    {
+      salutation: 'Mr.',
+      firstName: 'Blake',
+      lastName: 'Corum',
+      companyName: 'ABC Company',
+      phoneNumbers: [
+        {
+          type: 'Work',
+          number: '555-555-6666',
+          primary: true,
+        },
+        {
+          type: 'Cell',
+          number: '555-555-5555',
+          primary: false,
+        },
+      ]
+    },
+    {
+        salutation: 'Mr.',
+        firstName: 'Jake',
+        lastName: 'Moody',
+        companyName: 'ABC Company',
+        phoneNumbers: [
+          {
+            type: 'Work',
+            number: '555-555-6666',
+            primary: false,
+          },
+          {
+            type: 'Cell',
+            number: '555-555-7777',
+            primary: true,
+          },
+        ]
+      },
+      {
+        salutation: 'Mr.',
+        firstName: 'Billy',
+        lastName: 'Jackson',
+        companyName: 'ABC Company',
+        phoneNumbers: [
+          {
+            type: 'Work',
+            number: '555-555-6666',
+            primary: false,
+          },
+          {
+            type: 'Cell',
+            number: '555-555-7777',
+            primary: true,
+          },
+        ]
+      },
+  ];
+
+export default contacts;

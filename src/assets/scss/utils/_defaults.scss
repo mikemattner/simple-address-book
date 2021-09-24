@@ -3,8 +3,8 @@ html {
   line-height: 1.5;
   letter-spacing: 0.0125rem;
 
-  @include min-media(1200px) {
-    font-size: 20px;
+  @include min-media(770px) {
+    font-size: 18px;
   }
 }
 body {
@@ -39,11 +39,11 @@ h6 {
 }
 
 a {
-  color: $color-brand-primary-red;
+  color: $color-bright-blue;
   transition: all 0.25s ease-in-out;
 
   &:hover {
-    color: $color-brand-secondary-red;
+    color: shade($color-bright-blue, 30%);
   }
 }
 

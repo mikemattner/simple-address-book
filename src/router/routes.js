@@ -1,6 +1,5 @@
 import Login from '../views/login/Login.vue';
 import Contacts from '../views/contacts/Contacts.vue';
-import Settings from '../views/settings/Settings.vue';
 
 const routes = [
   {
@@ -23,16 +22,6 @@ const routes = [
       requiresAuth: true,
     },
   },
-  {
-    path: '/settings',
-    name: 'Settings',
-    component: Settings,
-    meta: {
-      title: 'Settings', 
-      layout: 'app',
-      requiresAuth: true,
-    },
-  }
 ]
 
 export default routes;

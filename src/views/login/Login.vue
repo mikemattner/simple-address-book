@@ -30,13 +30,13 @@
           required
           v-model="userLogin.password" />
         <div class="login-box__form-button-container">
-          <Button 
+          <elm-button 
             type="submit"
             block
             :loading="loading"
           >
             Login
-          </Button>
+          </elm-button>
         </div>
       </form>
     </div>
@@ -46,14 +46,14 @@
 <script>
 import VueLogo from '@/components/brand/VueLogo.vue'
 import InputText from '@/components/ui/InputText.vue'
-import Button from '@/components/ui/Button.vue'
+import ElmButton from '@/components/ui/ElmButton.vue'
 
 export default {
   name: "Login",
   components: {
     VueLogo,
     InputText,
-    Button,
+    ElmButton,
   },
   data() {
     return {

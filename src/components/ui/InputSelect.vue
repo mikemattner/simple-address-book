@@ -1,14 +1,14 @@
 <template>
-  <div class="input-text-field">
+  <div class="input-select-field">
     <label 
-      class="input-text-field__label"
+      class="input-select-field__label"
       :for="id"
     >
       {{ label }} <sup v-if="required">*</sup>
     </label>
-    <input
+    <select
       :class="[
-      'input-text-field__input',
+      'input-select-field__input',
         error == true ? 'error' : '',
       ]"
       :id="id"
@@ -16,15 +16,23 @@
       :type="type" 
       :value="value" 
       @input="$emit('update', $event.target.value)"
-    />
-    <div class="input-text-field__input-error slide-down-small" v-if="error">
+    >   
+      <option disabled value="">Select one...</option>
+      <option v-for="option in options" :value="option">{{ option }}</option>
+    </select>
+    <div class="input-select-field__input-error slide-down-small" v-if="error">
       {{ message }}
     </div>
   </div>
 </template>
 
 <script>
+import DropDownArrow from '@/components/svg/DropDownArrow.svg'
+
 export default {
+  components: {
+    DropDownArrow,
+  },
   props: {
     error: {
       type: Boolean,
@@ -34,7 +42,7 @@ export default {
       type: String,
       required: true,
     },
-    name: {
+    label: {
       type: String,
       required: true,
     },
@@ -42,21 +50,20 @@ export default {
       type: String,
       required: false,
     },
-    label: {
+    name: {
       type: String,
+      required: true,
+    },
+    options: {
+      type: Array,
       required: true,
     },
     required: {
       type: Boolean,
       default: false,
     },
-    type: {
-      type: String,
-      required: true,
-    },
     value: {
       type: String,
-      required: true,
     },
   },
   model: {
@@ -67,7 +74,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.input-text-field {
+.input-select-field {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -92,12 +99,24 @@ export default {
   &__input {
     border: 1px solid $color-cool-gray;
     border-radius: 2px;
-    background: $color-cool-gray;
+    background-color: $color-cool-gray;
+    background-image:
+      linear-gradient(45deg, transparent 50%, $color-body-copy 50%),
+      linear-gradient(135deg, $color-body-copy 50%, transparent 50%);
+    background-position:
+      calc(100% - 20px) 0.75em,
+      calc(100% - 15px) 0.75em;
+    background-size:
+      5px 5px,
+      5px 5px,
+      1px 1.5em;
+    background-repeat: no-repeat;
     font-weight: 700;
     padding: 0.25rem;
     -webkit-appearance: none;
     outline: none;
     transition: all 0.25s ease-in-out;
+    position: relative;
 
     &:hover {
       border-color: $color-bright-blue;
@@ -107,7 +126,7 @@ export default {
         15px 11.3px 33.4px rgba(0, 0, 0, 0.05), 36px 27px 80px rgba(0, 0, 0, 0.07);
     }
     &:focus {
-      background: $color-white;
+      background-color: $color-white;
       border-color: $color-bright-blue;
       box-shadow: 0 0 4px $color-bright-blue,
         1px 0.7px 2.2px rgba(0, 0, 0, 0.02),
