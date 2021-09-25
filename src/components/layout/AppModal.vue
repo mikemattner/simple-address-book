@@ -1,7 +1,7 @@
 <template>
   <transition name="modal">
     <div class="modal-mask">
-        <div class="modal-container slide-up long-shadow">
+        <div class="modal-container slide-up long-shadow" :style="cssProps">
           <div class="modal-container__header">
             <div class="modal-container__title">{{ title }}</div>
             <elm-button 
@@ -35,7 +35,19 @@ export default {
   props: {
     title: String,
     closeButton: Boolean,
-  }
+    modalWidth: {
+      type: String,
+      default: '500',
+      required: false,
+    },
+  },
+  computed: {
+    cssProps() {
+      return {
+        '--modal-width': this.modalWidth + "px",
+      }
+    }
+  },
 };
 </script>
 
@@ -58,17 +70,20 @@ export default {
   }
   
   &-body {
+    max-height: 400px;
     padding: 20px;
+    overflow-y: auto;
   }
 
   &-container {
     background-color: $color-white;
     margin: 0px auto;
-    max-width: 500px;
+    max-width: var(--modal-width);
     width: 100%;
-    transition: all .0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
     position: relative;
     border-radius: 10px;
+    max-height: 600px;
 
     @include max-media(500px) {
       position: absolute;

@@ -8,7 +8,10 @@
         </div>
       </div>
       <div class="app-nav-bar__header-menu">
-        <elm-button @clicked="$emit('settings')" tertiary>{{ userName }}'s Settings</elm-button>
+        <div class="app-nav-bar__header-menu-greeting">
+          Hey there, {{ userName }}.
+        </div>
+        <elm-button @clicked="$emit('settings')" tertiary>Settings</elm-button>
         <elm-button @clicked="logOut" tertiary>Log Out</elm-button>
       </div>
     </div>
@@ -82,6 +85,10 @@ export default {
       &-menu {
         display: flex;
         align-items: center;
+
+        &-greeting {
+          font-size: 0.75rem;
+        }
       }
     }
   }

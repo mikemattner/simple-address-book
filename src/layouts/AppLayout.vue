@@ -4,8 +4,6 @@
     <slot />
     <app-modal v-if="settings"
       @close="toggle()"
-      confirm="Update"
-      cancel="Cancel"
       :loading="loading"
       title="Update Settings"
       closeButton
@@ -148,7 +146,6 @@ export default {
     position: relative;
     max-width: 1000px;
     margin: 0 auto;
-    padding: 80px 20px 0 20px;
   }
   .settings-form {
     &__button-container {

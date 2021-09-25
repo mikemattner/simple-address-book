@@ -94,7 +94,7 @@ export default {
     border-radius: 2px;
     background: $color-cool-gray;
     font-weight: 700;
-    padding: 0.25rem;
+    padding: 0.5rem;
     -webkit-appearance: none;
     outline: none;
     transition: all 0.25s ease-in-out;

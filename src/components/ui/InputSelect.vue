@@ -13,11 +13,10 @@
       ]"
       :id="id"
       :name="name"
-      :type="type" 
       :value="value" 
       @input="$emit('update', $event.target.value)"
     >   
-      <option disabled value="">Select one...</option>
+      <option disabled value="">{{ empty }}</option>
       <option v-for="option in options" :value="option">{{ option }}</option>
     </select>
     <div class="input-select-field__input-error slide-down-small" v-if="error">
@@ -27,13 +26,13 @@
 </template>
 
 <script>
-import DropDownArrow from '@/components/svg/DropDownArrow.svg'
-
 export default {
-  components: {
-    DropDownArrow,
-  },
   props: {
+    empty: {
+      type: String,
+      default: 'Select one...',
+      required: false,
+    },
     error: {
       type: Boolean,
       default: false,
@@ -104,15 +103,15 @@ export default {
       linear-gradient(45deg, transparent 50%, $color-body-copy 50%),
       linear-gradient(135deg, $color-body-copy 50%, transparent 50%);
     background-position:
-      calc(100% - 20px) 0.75em,
-      calc(100% - 15px) 0.75em;
+      calc(100% - 20px) 1.125em,
+      calc(100% - 15px) 1.125em;
     background-size:
       5px 5px,
       5px 5px,
       1px 1.5em;
     background-repeat: no-repeat;
     font-weight: 700;
-    padding: 0.25rem;
+    padding: 0.5rem;
     -webkit-appearance: none;
     outline: none;
     transition: all 0.25s ease-in-out;
