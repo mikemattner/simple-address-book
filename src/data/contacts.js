@@ -7,7 +7,7 @@ const contacts = [
     companyName: 'ABC Company',
     phoneNumbers: [
       {
-        type: 'Work',
+        type: '',
         number: '555-555-6666',
         primary: true,
       },

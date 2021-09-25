@@ -13,7 +13,7 @@
         </div>
         <div v-for="(phoneNumber, index) in item.phoneNumbers" class="list-view-item__details-number">
           <span v-if="phoneNumber.primary">
-            <span :class="[
+            <span v-if="phoneNumber.type != ''" :class="[
                 'item-chip',
                 phoneNumber.type == 'Work' ? 'item-chip--work' : '',
                 phoneNumber.type == 'Cell' ? 'item-chip--cell' : '',
