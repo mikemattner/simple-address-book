@@ -7,14 +7,14 @@ const contacts = [
     companyName: 'ABC Company',
     phoneNumbers: [
       {
-        type: '',
+        type: 'Work',
         number: '555-555-6666',
-        primary: true,
+        primary: 'true',
       },
       {
         type: 'Cell',
         number: '555-555-5555',
-        primary: false,
+        primary: 'false',
       },
     ]
   },
@@ -28,12 +28,12 @@ const contacts = [
       {
         type: 'Work',
         number: '555-555-6666',
-        primary: false,
+        primary: 'false',
       },
       {
         type: 'Cell',
         number: '555-555-7777',
-        primary: true,
+        primary: 'true',
       },
     ]
   },
@@ -47,12 +47,12 @@ const contacts = [
       {
         type: 'Work',
         number: '555-555-6666',
-        primary: false,
+        primary: 'false',
       },
       {
         type: 'Home',
         number: '555-555-7777',
-        primary: true,
+        primary: 'true',
       },
     ]
   },

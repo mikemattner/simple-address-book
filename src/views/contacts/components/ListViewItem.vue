@@ -12,7 +12,7 @@
           {{ item.companyName }}
         </div>
         <div v-for="(phoneNumber, index) in item.phoneNumbers" class="list-view-item__details-number">
-          <span v-if="phoneNumber.primary">
+          <span v-if="phoneNumber.primary == 'true'">
             <span v-if="phoneNumber.type != ''" :class="[
                 'item-chip',
                 phoneNumber.type == 'Work' ? 'item-chip--work' : '',
@@ -25,8 +25,8 @@
       </div>
     </div>
     <div class="list-view-item__actions">
-      <elm-button @clicked="$emit('details')" tertiary>Details</elm-button>
-      <elm-button @clicked="$emit('delete')" tertiary error>Delete</elm-button>
+      <elm-button @clicked="$emit('details')" secondary>Details</elm-button>
+      <elm-button @clicked="$emit('delete')" secondary error>Delete</elm-button>
     </div>
   </div>
 </template>

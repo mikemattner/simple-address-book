@@ -105,24 +105,5 @@ export default {
       margin-bottom: 0;
     }
   }
-  .add-contacts-fake-photo {
-    padding: 20px;
-    background-color: tint($color-brand-secondary-blue, 70%);
-    margin-bottom: 1rem;
-    text-align: center;
-    
-    &:hover {
-      cursor: not-allowed;
-    }
-
-    img {
-      width: 70px;
-      height: 70px;
-      overflow: hidden;
-      border-radius: 50%;
-      margin-right: 2rem;
-      margin: 0 auto;
-    }
-  }
 }
 </style>

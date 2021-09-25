@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     loggedIn: JSON.parse(localStorage.getItem('fakeToken')) || false,
     user: JSON.parse(localStorage.getItem('fakeUser')) || {},
-    contacts: JSON.parse(localStorage.getItem('fakeContacts')) || Contacts,
+    contacts: JSON.parse(localStorage.getItem('fakeContacts')) || [],
   },
   mutations: {
     SET_LOGIN(state, bool) {

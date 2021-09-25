@@ -98,18 +98,55 @@ export default {
   }
 
   &--secondary {
-    background-color: $color-brand-secondary-blue;
+    background-color: unset;
+    color: $color-bright-blue;
+    padding: 0.5rem;
+    box-shadow: inset 0 0 0 2px $color-bright-blue;
 
     &:hover {
-      background-color: shade($color-brand-secondary-blue, 10%);
+      background-color: rgba($color-bright-blue,0.1);
+      box-shadow: inset 0 0 0 2px $color-bright-blue;
+      color: shade($color-bright-blue, 30%);
     }
     &:focus {
-      background-color: shade($color-brand-secondary-blue, 10%);
-      box-shadow: 0 0 4px $color-brand-secondary-blue,
-        1px 0.7px 2.2px rgba(0, 0, 0, 0.02),
-        2.4px 1.8px 5.3px rgba(0, 0, 0, 0.028),
-        4.5px 3.4px 10px rgba(0, 0, 0, 0.035), 8px 6px 17.9px rgba(0, 0, 0, 0.042),
-        15px 11.3px 33.4px rgba(0, 0, 0, 0.05), 36px 27px 80px rgba(0, 0, 0, 0.07);
+      background-color: rgba($color-bright-blue,0.1);
+      box-shadow: inset 0 0 0 2px $color-bright-blue;
+      color: shade($color-bright-blue, 30%);
+    }
+
+    &.button--error {
+      background-color: unset;
+      color: $color-brand-primary-red;
+      box-shadow: inset 0 0 0 2px $color-brand-primary-red;
+
+      &:hover {
+        background-color: rgba($color-brand-primary-red,0.1);
+        color: shade($color-brand-primary-red, 20%);
+        box-shadow: inset 0 0 0 2px $color-brand-primary-red;
+      }
+      &:focus {
+        background-color: rgba($color-brand-primary-red,0.1);
+        box-shadow: none;
+        color: shade($color-brand-primary-red, 20%);
+        box-shadow: inset 0 0 0 2px $color-brand-primary-red;
+      }
+    }
+    &.button--success {
+      background-color: unset;
+      color: $color-bright-green;
+      box-shadow: inset 0 0 0 2px $color-bright-green;
+
+      &:hover {
+        background-color: rgba($color-bright-green,0.1);
+        color: shade($color-bright-green, 20%);
+        box-shadow: inset 0 0 0 2px $color-bright-green;
+      }
+      &:focus {
+        background-color: rgba($color-bright-green,0.1);
+        box-shadow: none;
+        color: shade($color-bright-green, 20%);
+        box-shadow: inset 0 0 0 2px $color-bright-green;
+      }
     }
   }
 
