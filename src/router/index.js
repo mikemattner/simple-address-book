@@ -1,29 +1,43 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import defaultRoutes from './routes';
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
-
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+  routes: defaultRoutes
 })
+
+router.beforeEach((to, from, next) => {
+  const LOGGED_IN = localStorage.getItem('fakeToken');
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+      if (!LOGGED_IN) {
+          next({
+              path: '/',
+          });
+      } else {
+          next();
+      }
+  } else if (to.matched.some(record => record.meta.guest)) {
+    if (!LOGGED_IN) {
+      next();
+    } else {
+      next({
+        path: '/contacts',
+      });
+    }
+  } else {
+    next({
+      path: '/',
+    });
+  }
+});
+
+router.afterEach((to, from) => {
+  const DEFAULT_TITLE = 'Address Book';
+  Vue.nextTick(() => {
+      document.title = `${to.meta.title} | ${DEFAULT_TITLE}` || DEFAULT_TITLE;
+  });
+});
 
 export default router

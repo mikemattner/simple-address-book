@@ -1,4 +1,5 @@
 # Simple Little Address Book
+For all of your phone number record keeping needs.
 
 ## Project setup
 ```
