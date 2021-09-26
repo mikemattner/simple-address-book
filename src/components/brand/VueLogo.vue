@@ -1,7 +1,7 @@
 <template>
     <img 
         alt="Vue Address Book" 
-        src="../../assets/logo.png"
+        src="../../assets/media/logo.png"
         :class="[
             'brand__logo',
             large == true ? 'brand__logo-large' : '',
