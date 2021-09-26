@@ -9,13 +9,16 @@
       <p>{{ empty.body }}</p>
       <elm-button @clicked="toggleAddModal()">Add Contact</elm-button>
     </div>
-    <div v-if="contacts.length > 0" class="contacts-content__list long-shadow">
-      <list-view-item
-        v-for="(contact, index) in sortedContacts"
-        :item="contact"
-        @details="viewDetails(contact)"
-        @delete="removeFromContacts(contact)"
-        :key="contacts.indexOf(contact)" />
+    <div v-if="contacts.length > 0" class="contacts-content__view">
+      <details-view :open="viewContact" :item="contact" @close="toggleDetails()" />
+      <div class="contacts-content__list long-shadow">
+        <list-view-item
+          v-for="(contact, index) in sortedContacts"
+          :item="contact"
+          @details="viewDetails(contact)"
+          @delete="removeFromContacts(contact)"
+          :key="contacts.indexOf(contact)" />
+      </div>
     </div>
     <contact-modal @toggle="toggleAddModal()" :open="addContact" />
   </div>
@@ -25,6 +28,7 @@
 import ContactModal from '@/views/contacts/components/ContactModal.vue'
 import ElmButton from '@/components/ui/ElmButton.vue'
 import ListViewItem from '@/views/contacts/components/ListViewItem.vue'
+import DetailsView from '@/views/contacts/components/DetailsView.vue'
 
 export default {
   name: "Contacts",
@@ -32,6 +36,7 @@ export default {
     ContactModal,
     ElmButton,
     ListViewItem,
+    DetailsView,
   },
   data() {
     return {
@@ -42,6 +47,8 @@ export default {
       },
       contacts: this.$store.state.contacts,
       addContact: false,
+      contact: null,
+      viewContact: false,
     };
   },
   computed: {
@@ -57,6 +64,15 @@ export default {
   methods: {
     toggleAddModal() {
       this.addContact = !this.addContact;
+    },
+    toggleDetails() {
+      this.viewContact = !this.viewContact;
+    },
+    viewDetails(contact) {
+      this.contact = contact;
+      if (!this.viewContact) {
+        this.toggleDetails();
+      }
     },
     removeFromContacts(contact) {
       this.contacts.splice(this.contacts.indexOf(contact), 1);
@@ -76,7 +92,6 @@ export default {
 <style lang="scss">
 .contacts-content {
   padding: 80px 20px;
-  overflow: visible;
 
   &__header {
     display: flex;
@@ -84,9 +99,17 @@ export default {
     justify-content: space-between;
   }
 
+  &__view {
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+  }
+
   &__list {
     background-color: $color-white;
     border-radius: 10px;
+    flex-grow: 1;
+    transition: all 0.25s ease-in-out;
   }
 
   &__empty {

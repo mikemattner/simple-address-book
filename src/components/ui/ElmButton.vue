@@ -12,6 +12,7 @@
     ]" 
     @click="$emit('clicked')"
     :type="type"
+    :title="title"
   >
     <span class="button--content" v-if="!loading">
       <slot />
@@ -30,6 +31,7 @@ export default {
     secondary: Boolean,
     success: Boolean,
     tertiary: Boolean,
+    title: String,
     type: {
       type: String,
       default: "button",

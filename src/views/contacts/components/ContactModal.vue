@@ -10,7 +10,7 @@
       <div class="add-contacts-form__fields">
         <div class="add-contacts-fake-photo">
           <img :src="contact.photo" alt="" />
-          Add photo
+          Add photo +
         </div>
         <div class="add-contacts-form__field-label">
           Contact Details
@@ -57,11 +57,13 @@
           :key="`phone-${index}`">
           <div class="number-container">
             <input-select
+              :error="typeValidation[index].typeInvalid"
               :id="`phonetype-${index}`"
               :name="`phonetype-${index}`"
               :message="required"
               label="Type"
               empty="Select.."
+              required
               :options="['Work','Home','Cell']"
               v-model="phoneNumbers[index].type" />
             <input-text
@@ -81,8 +83,8 @@
               v-model="phoneNumbers[index].primary" />
           </div>
           <div class="button-container">
-            <elm-button @clicked="addNumber()" success>+</elm-button>
-            <elm-button v-if="phoneNumbers.length > 1" @clicked="removeNumber(index)" error>-</elm-button>
+            <elm-button @clicked="addNumber()" title="Add Number" success><span class="visually-hidden">Add</span> +</elm-button>
+            <elm-button v-if="phoneNumbers.length > 1" title="Remove Number" @clicked="removeNumber(index)" error><span class="visually-hidden">Remove</span> -</elm-button>
           </div>
         </div>
       </div>
@@ -102,7 +104,7 @@ import InputSelect from '@/components/ui/InputSelect.vue'
 import InputCheckbox from '@/components/ui/InputCheckbox.vue'
 
 export default {
-  name: "Contacts",
+  name: "ContactModal",
   components: {
     AppModal,
     ElmButton,
@@ -137,11 +139,14 @@ export default {
       phoneValidation: [{
         numberInvalid: false,
       }],
+      typeValidation: [{
+        typeInvalid: false,
+      }],
       phoneErrors: [],
+      typeErrors: [],
       loading: false,
       firstNameInvalid: null,
       lastNameInvalid: null,
-      phoneNumberInvalid: null,
     };
   },
   computed: {
@@ -184,6 +189,13 @@ export default {
         this.lastNameInvalid = false;
       }
     },
+    validateNumberType(value, index) {
+      if (value.length < 2) {
+        this.typeValidation[index].typeInvalid = true;
+      } else {
+        this.typeValidation[index].typeInvalid = false;
+      }
+    },
     validateNumber(value, index) {
       if (value.length < 2) {
         this.phoneValidation[index].numberInvalid = true;
@@ -200,10 +212,14 @@ export default {
       this.phoneValidation.push({
         numberInvalid: false,
       });
+      this.typeValidation.push({
+        typeInvalid: false,
+      });
     },
     removeNumber(index) {
       this.phoneNumbers.splice(index, 1);
       this.phoneValidation.splice(index, 1);
+      this.typeValidation.splice(index, 1);
     },
     toggleAddModal() {
       this.addContact = !this.addContact;
@@ -220,8 +236,11 @@ export default {
         number: '',
         primary: 'false',
       }];
-      this.numberInvalid = [{
+      this.phoneValidation = [{
         numberInvalid: false,
+      }];
+      this.typeValidation = [{
+        typeInvalid: false,
       }];
       this.firstNameInvalid = null;
       this.lastNameInvalid = null;
@@ -237,9 +256,19 @@ export default {
         this.phoneErrors.push(this.phoneValidation[index].numberInvalid);
       });
 
-      let phoneValid = this.phoneErrors.includes(true);
+      let phoneInvalid = this.phoneErrors.includes(true);
 
-      if (this.firstNameInvalid || this.lastNameInvalid || phoneValid) {
+      this.typeErrors = []; 
+      this.phoneNumbers.forEach((item, index) => {
+        this.validateNumberType(item.type, index);
+        this.typeErrors.push(this.typeValidation[index].typeInvalid);
+      });
+
+      console.log(this.typeErrors);
+      let typeInvalid = this.typeErrors.includes(true);
+      console.log(typeInvalid);
+
+      if (this.firstNameInvalid || this.lastNameInvalid || phoneInvalid || typeInvalid) {
         return;
       }
 

@@ -42,6 +42,12 @@
   animation: slideIn 0.25s forwards;
 }
 
+.slide-right {
+  transform: translate(-50px, 0);
+  opacity: 0;
+  animation: slideIn 0.5s forwards;
+}
+
 .load-animate {
   animation: loadAnimate infinite linear 1s;
 }

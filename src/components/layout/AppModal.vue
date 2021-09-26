@@ -10,6 +10,7 @@
               class="modal-close"
               tertiary
               light
+              title="Close"
               >
               <span class="visually-hidden">Close</span> <close-icon />
             </elm-button>

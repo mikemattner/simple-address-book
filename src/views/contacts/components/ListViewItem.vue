@@ -13,12 +13,6 @@
         </div>
         <div v-for="(phoneNumber, index) in item.phoneNumbers" class="list-view-item__details-number">
           <span v-if="phoneNumber.primary == 'true'">
-            <span v-if="phoneNumber.type != ''" :class="[
-                'item-chip',
-                phoneNumber.type == 'Work' ? 'item-chip--work' : '',
-                phoneNumber.type == 'Cell' ? 'item-chip--cell' : '',
-                phoneNumber.type == 'Home' ? 'item-chip--home' : '',
-              ]">{{ phoneNumber.type }}</span> 
             {{ phoneNumber.number }}
           </span>
         </div>
@@ -52,6 +46,17 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  transition: all 0.25s ease-in-out;
+
+  @include between-media(801px, 950px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  @include max-media(500px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
   
   &:first-child {
     border-top: none;
@@ -68,11 +73,11 @@ export default {
   }
   
   &__details-photo {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     overflow: hidden;
     border-radius: 50%;
-    margin-right: 2rem;
+    margin-right: 1rem;
   }
 
   &__details-number {
@@ -103,7 +108,12 @@ export default {
     }
   }
   &__actions {
-    margin-left: auto;
+    @include min-media(951px) {
+      margin-left: auto;
+    }
+    @include between-media(501px, 800px) {
+      margin-left: auto;
+    }
   }
 }
 </style>
