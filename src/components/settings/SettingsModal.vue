@@ -5,7 +5,7 @@
     title="Update Settings"
     closeButton
     >
-    <form @submit.prevent="update" class="settings-form">
+    <template v-slot:body>
       <div class="settings-form__fields">
         <input-text
           :error="nameInvalid"
@@ -26,11 +26,11 @@
           required
           v-model="settingsInfo.password" />
       </div>
-      <div class="settings-form__button-container">
-        <elm-button type="submit" :loading="loading">Update</elm-button>
-        <elm-button @clicked="toggle()" tertiary error>Cancel</elm-button>
-      </div>
-    </form>
+    </template>
+    <template v-slot:footer>
+      <elm-button type="submit" :loading="loading" @clicked="update()">Update</elm-button>
+      <elm-button @clicked="toggle()" tertiary error>Cancel</elm-button>
+    </template>
   </app-modal>
 </template>
 

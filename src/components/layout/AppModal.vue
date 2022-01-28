@@ -16,7 +16,10 @@
             </elm-button>
           </div>
           <div class="modal-body">
-            <slot />
+            <slot name="body"></slot>
+          </div>
+          <div class="modal-footer">
+            <slot name="footer"></slot>
           </div>
         </div>
     </div>
@@ -74,6 +77,13 @@ export default {
     max-height: 400px;
     padding: 20px;
     overflow-y: auto;
+  }
+
+  &-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
   }
 
   &-container {

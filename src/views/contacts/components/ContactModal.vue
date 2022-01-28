@@ -6,93 +6,95 @@
     modalWidth="600"
     closeButton
     >
-    <form @submit.prevent="addToContacts" class="add-contacts-form">
-      <div class="add-contacts-form__fields">
-        <div class="add-contacts-fake-photo">
-          <img :src="contact.photo" alt="" />
-          Add photo +
-        </div>
-        <div class="add-contacts-form__field-label">
-          Contact Details
-        </div>
-        <div class="add-contacts-form__field-info">
-          <input-select
-            id="salutation" 
-            name="salutation"
-            label="Salutation"
-            empty="Select.."
-            :options="['M','Mr.','Mrs.','Ms.']"
-            v-model="contact.salutation" />
-          <input-text
-            :error="firstNameInvalid"
-            id="first-name" 
-            name="firstName"
-            :message="required"
-            type="text" 
-            label="First Name"
-            required
-            v-model="contact.firstName" />
-          <input-text
-            :error="lastNameInvalid"
-            id="last-name" 
-            name="lastName" 
-            :message="required"
-            type="text" 
-            label="Last Name"
-            required
-            v-model="contact.lastName" />
-          <input-text
-            id="company-name" 
-            name="companyName" 
-            type="text" 
-            label="Company Name"
-            v-model="contact.companyName" />
-        </div>
-        <div class="add-contacts-form__field-label">
-          Contact Phone Numbers
-        </div>
-        <div 
-          class="add-contacts-form__field-numbers"
-          v-for="(phone, index) in phoneNumbers"
-          :key="`phone-${index}`">
-          <div class="number-container">
+    <template v-slot:body>
+      <div class="add-contacts-form">
+        <div class="add-contacts-form__fields">
+          <div class="add-contacts-fake-photo">
+            <img :src="contact.photo" alt="" />
+            Add photo +
+          </div>
+          <div class="add-contacts-form__field-label">
+            Contact Details
+          </div>
+          <div class="add-contacts-form__field-info">
             <input-select
-              :error="typeValidation[index].typeInvalid"
-              :id="`phonetype-${index}`"
-              :name="`phonetype-${index}`"
-              :message="required"
-              label="Type"
+              id="salutation" 
+              name="salutation"
+              label="Salutation"
               empty="Select.."
-              required
-              :options="['Work','Home','Cell']"
-              v-model="phoneNumbers[index].type" />
+              :options="['M','Mr.','Mrs.','Ms.']"
+              v-model="contact.salutation" />
             <input-text
-              :error="phoneValidation[index].numberInvalid"
-              :id="`phonenumber-${index}`"
-              :name="`phonenumber-${index}`"
+              :error="firstNameInvalid"
+              id="first-name" 
+              name="firstName"
               :message="required"
               type="text" 
-              label="Phone Number"
+              label="First Name"
               required
-              v-model="phoneNumbers[index].number" />
-            <input-checkbox
-              :id="`phoneprimary-${index}`"
-              :name="`phoneprimary-${index}`"
-              label="Primary?"
-              inputValue="true"
-              v-model="phoneNumbers[index].primary" />
+              v-model="contact.firstName" />
+            <input-text
+              :error="lastNameInvalid"
+              id="last-name" 
+              name="lastName" 
+              :message="required"
+              type="text" 
+              label="Last Name"
+              required
+              v-model="contact.lastName" />
+            <input-text
+              id="company-name" 
+              name="companyName" 
+              type="text" 
+              label="Company Name"
+              v-model="contact.companyName" />
           </div>
-          <div class="button-container">
-            <elm-button @clicked="addNumber()" title="Add Number" success><span class="visually-hidden">Add</span> +</elm-button>
-            <elm-button v-if="phoneNumbers.length > 1" title="Remove Number" @clicked="removeNumber(index)" error><span class="visually-hidden">Remove</span> -</elm-button>
+          <div class="add-contacts-form__field-label">
+            Contact Phone Numbers
+          </div>
+          <div 
+            class="add-contacts-form__field-numbers"
+            v-for="(phone, index) in phoneNumbers"
+            :key="`phone-${index}`">
+            <div class="number-container">
+              <input-select
+                :error="typeValidation[index].typeInvalid"
+                :id="`phonetype-${index}`"
+                :name="`phonetype-${index}`"
+                :message="required"
+                label="Type"
+                empty="Select.."
+                required
+                :options="['Work','Home','Cell']"
+                v-model="phoneNumbers[index].type" />
+              <input-text
+                :error="phoneValidation[index].numberInvalid"
+                :id="`phonenumber-${index}`"
+                :name="`phonenumber-${index}`"
+                :message="required"
+                type="text" 
+                label="Phone Number"
+                required
+                v-model="phoneNumbers[index].number" />
+              <input-checkbox
+                :id="`phoneprimary-${index}`"
+                :name="`phoneprimary-${index}`"
+                label="Primary?"
+                inputValue="true"
+                v-model="phoneNumbers[index].primary" />
+            </div>
+            <div class="button-container">
+              <elm-button @clicked="addNumber()" title="Add Number" success><span class="visually-hidden">Add</span> +</elm-button>
+              <elm-button v-if="phoneNumbers.length > 1" title="Remove Number" @clicked="removeNumber(index)" error><span class="visually-hidden">Remove</span> -</elm-button>
+            </div>
           </div>
         </div>
       </div>
-      <div class="settings-form__button-container">
-        <elm-button type="submit" :loading="loading">Save</elm-button>
-        <elm-button @clicked="toggleAddModal()" tertiary error>Cancel</elm-button>
-      </div>
-    </form>
+    </template>
+    <template v-slot:footer>
+      <elm-button type="submit" :loading="loading" @clicked="addToContacts()">Save</elm-button>
+      <elm-button @clicked="toggleAddModal()" tertiary error>Cancel</elm-button>
+    </template>
   </app-modal>
 </template>
 
